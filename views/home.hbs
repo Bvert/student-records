@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <title>IST4035 Students</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+
+    <body onload="fetchStudents()">
+        <h1>STUDENTS RECORDS</h1>
+        <div class="top-div">
+            <div class="form-style-6">
+                <h1>ADD RECORD</h1>
+                <form>
+                    <label>
+                        <span>Student ID:</span>
+                        <input id="studentId" type="text" />
+                    </label>
+                    <label>
+                        <span>Student name:</span>
+                        <input id="studentName" type="text" />
+                    </label>
+                    <label>
+                        <span>Total Score:</span>
+                        <input id="studentScore" type="text" name="studScore" />
+                    </label>
+                    <label>
+                        <span> </span>
+                        <button>Add student</button>
+                    </label>
+                </form>
+            </div>
+            <table id="summary">
+                <tr>
+                    <td>Mean</td>
+                    <td>Median</td>
+                    <td>Mode</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p id="mean"></p>
+                    </td>
+                    <td>
+                        <p id="median"></p>
+                    </td>
+                    <td>
+                        <p id="mode"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <table id="content">
+        </table>
+
+
+
+    </body>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+
+</html>
