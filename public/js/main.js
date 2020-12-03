@@ -74,12 +74,12 @@ function populateContent(students) {
         row.classList.add(student.id);
         var element = student.id;
 
-        // deleteBtn.addEventListener('click', (e) => {
-        //     if (confirm(`Are you sure you want to delete ${student.name}'s data?`)) {
-        //         deleteBtn.parentElement.parentElement.remove()
-        //     }
+        deleteBtn.addEventListener('click', (e) => {
+            if (confirm(`Are you sure you want to delete ${student.name}'s data?`)) {
+                deleteBtn.parentElement.parentElement.remove()
+            }
 
-        // })
+        })
 
     });
     deleteStudent(studentId)
