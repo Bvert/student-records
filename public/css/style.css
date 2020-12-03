@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 body {
-    background-color: #3e94ec;
+    background-color: #92cad1;
     font-family: "Roboto", helvetica, arial, sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -245,4 +245,38 @@ tr a {
 tr a:hover {
     color: #000000;
     background-color: #9ea7af;
+}
+
+.charts::before,
+.charts::after {
+    clear: both;
+}
+
+.charts::after {
+    content: '';
+    display: table;
+}
+
+.chart1 {
+    width: 48%;
+    float: left;
+}
+
+.chart2 {
+    float: right;
+    width: 48%;
+}
+
+
+/* Footer */
+
+footer {
+    width: 100%;
+    height: 5%;
+}
+
+footer p {
+    font-size: .7em;
+    opacity: .7;
+    text-align: center;
 }

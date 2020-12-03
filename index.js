@@ -4,7 +4,8 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 const jsonParser = bodyParser.json();
-const fileName = 'students.json';
+const fileName = "students.json";
+const router = require('express').Router()
 
 
 // Load data from file
@@ -28,14 +29,11 @@ app.get('/students', (request, response) => {
     response.send(data);
 });
 
-
 // This is a RESTful POST web service
 app.post('/students', jsonParser, (request, response) => {
     data.push(request.body);
     fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
     response.end();
-
-
 
 });
 

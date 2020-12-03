@@ -5,6 +5,8 @@
         <title>IST4035 Students</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/style.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
     </head>
 
     <body onload="fetchStudents()">
@@ -53,8 +55,19 @@
         <table id="content">
         </table>
 
+        <div class="charts">
+            <div class="chart1">
+                <h1>MEan & median</h1>
+                <canvas id="summaryChart"> </canvas>
+            </div>
 
-
+            <div class="chart2">
+                <h1>MODE SCORES</h1><canvas id="modeSummaryChart"></canvas>
+            </div>
+        </div>
+        <footer>
+            <p>Yours truly</p>
+        </footer>
     </body>
     <script src="js/main.js"></script>
     <script src="js/data.js"></script>

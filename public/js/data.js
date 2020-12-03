@@ -1,13 +1,16 @@
 function populatechart(students) {
     var values = [];
+    // var labels = [];
     students.forEach(student => {
         values.push(student.score);
+        // labels.push(student.name);
     });
 
 
     document.getElementById("mean").innerHTML = mean(values);
     document.getElementById("median").innerHTML = median(values);
     document.getElementById("mode").innerHTML = mode(values);
+    graphChart(values, median(values), mean(values), mode(values));
 
 }
 
@@ -17,7 +20,6 @@ function mean(values) {
     for (var i in values) {
         totalSum += values[i];
     }
-
     //Work out how many numbers are in our array.
     var numsCnt = values.length;
 
@@ -39,7 +41,7 @@ function median(values) {
 function mode(array) {
     var frequency = {}; // array of frequency.
     var maxFreq = 0; // holds the max frequency.
-    var modes = [];
+    var scoresMode = [];
 
     for (var i in array) {
         frequency[array[i]] = (frequency[array[i]] || 0) + 1; // increment frequency.
@@ -51,9 +53,79 @@ function mode(array) {
 
     for (var k in frequency) {
         if (frequency[k] == maxFreq) {
-            modes.push(k);
+            scoresMode.push(k);
         }
     }
 
-    return modes;
+    return scoresMode;
+}
+
+
+//GRAPH
+function graphChart(values, meanValue, modeValue) {
+
+    var medianValue = median(values);
+    var meanValue = mean(values);
+    var modeValue = mode(values)
+    var summaryStats = {
+        mean: meanValue,
+        mode: modeValue,
+        median: medianValue
+    }
+
+    var summaryCTX = document.getElementById('summaryChart').getContext('2d');
+    var statisticsChart = new Chart(summaryCTX, {
+        type: 'bar',
+        data: {
+            labels: ['Mean', 'Median'],
+            datasets: [{
+                borderWidth: 1,
+                label: 'Statistics',
+                data: [summaryStats.mean, summaryStats.median],
+                borderColor: 'rgba(0, 0, 0, .2)',
+                backgroundColor: '#000',
+                backgroundColor: [
+                    'rgba(233, 114, 77, 1)',
+                    'rgba(220, 215, 39, 1)'
+                ]
+
+            }]
+        },
+        options: {
+            legend: {
+                display: false,
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        }
+    });
+    const modeCTX = document.getElementById('modeSummaryChart').getContext('2d');
+    var modeChart = new Chart(modeCTX, {
+        type: 'bar',
+        data: {
+            labels: summaryStats.mode,
+            datasets: [{
+                label: 'Mode Statistics',
+                data: summaryStats.mode,
+                backgroundColor: 'rgba(48, 25, 52, 1)',
+                borderColor: 'rgba(0, 0, 0, .2)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        }
+    });
+
 }

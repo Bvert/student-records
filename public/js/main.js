@@ -2,7 +2,14 @@ const server = 'http://localhost:3000';
 var studentId;
 var studentName;
 var studentScore;
+var modal = document.querySelector('a')
 
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 async function fetchStudents() {
     const url = server + '/students';
     const options = {
@@ -15,6 +22,7 @@ async function fetchStudents() {
     const students = await response.json();
     populateContent(students);
     populatechart(students);
+    graphChart(students);
 }
 
 async function addStudent() {
@@ -51,7 +59,8 @@ function populateContent(students) {
         var deleteBtn = document.createElement('a');
         var deleteText = document.createTextNode('Delete');
         deleteBtn.appendChild(deleteText);
-        dataScore.appendChild(deleteBtn)
+        dataScore.appendChild(deleteBtn);
+        deleteBtn.setAttribute('onClick', `deleteStudent(${student.id})`);
 
         var dataName = document.createElement('td');
         var textName = document.createTextNode(student.name);
@@ -65,17 +74,30 @@ function populateContent(students) {
         row.classList.add(student.id);
         var element = student.id;
 
-        deleteBtn.addEventListener('click', (e) => {
-            if (confirm(`Are you sure you want to delete ${student.name}'s data?`)) {
-                deleteBtn.parentElement.parentElement.remove()
-            }
+        // deleteBtn.addEventListener('click', (e) => {
+        //     if (confirm(`Are you sure you want to delete ${student.name}'s data?`)) {
+        //         deleteBtn.parentElement.parentElement.remove()
+        //     }
 
-        })
+        // })
 
     });
+    deleteStudent(studentId)
 }
-
-
+//Delet student function
+async function deleteStudent(studentId) {
+    const url = server + '/students/delete';
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": studentId }),
+    }
+    const response = await fetch(url, options);
+    const students = await response.json()
+    populateContent(students);
+}
 
 document.querySelector('form').addEventListener('submit', (e) => {
     studentId = document.getElementById('studentId').value;
