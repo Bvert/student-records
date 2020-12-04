@@ -39,21 +39,21 @@ function median(values) {
 }
 
 function mode(array) {
-    var frequency = {}; // array of frequency.
-    var maxFreq = 0; // holds the max frequency.
+    var frequency = {};
+    var maxFreq = 0;
     var scoresMode = [];
 
     for (var i in array) {
-        frequency[array[i]] = (frequency[array[i]] || 0) + 1; // increment frequency.
+        frequency[array[i]] = (frequency[array[i]] || 0) + 1;
 
-        if (frequency[array[i]] > maxFreq) { // is this frequency > max so far ?
-            maxFreq = frequency[array[i]]; // update max.
+        if (frequency[array[i]] > maxFreq) {
+            maxFreq = frequency[array[i]];
         }
     }
 
-    for (var k in frequency) {
-        if (frequency[k] == maxFreq) {
-            scoresMode.push(k);
+    for (var j in frequency) {
+        if (frequency[j] == maxFreq) {
+            scoresMode.push(j);
         }
     }
 

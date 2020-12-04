@@ -5,11 +5,7 @@ var studentScore;
 var modal = document.querySelector('a')
 
 
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+
 async function fetchStudents() {
     const url = server + '/students';
     const options = {
@@ -60,7 +56,16 @@ function populateContent(students) {
         var deleteText = document.createTextNode('Delete');
         deleteBtn.appendChild(deleteText);
         dataScore.appendChild(deleteBtn);
+        deleteBtn.classList.add('Delete');
         deleteBtn.setAttribute('onClick', `deleteStudent(${student.id})`);
+
+        //Creating the edit button
+        var editBtn = document.createElement('a');
+        var editText = document.createTextNode('Edit');
+        editBtn.appendChild(editText);
+        dataScore.appendChild(editBtn);
+        editBtn.classList.add('Edit');
+
 
         var dataName = document.createElement('td');
         var textName = document.createTextNode(student.name);
@@ -71,8 +76,7 @@ function populateContent(students) {
 
         table.appendChild(row);
 
-        row.classList.add(student.id);
-        var element = student.id;
+
 
         deleteBtn.addEventListener('click', (e) => {
             if (confirm(`Are you sure you want to delete ${student.name}'s data?`)) {
@@ -81,8 +85,19 @@ function populateContent(students) {
 
         })
 
+        editBtn.addEventListener('click', (e) => {
+            if (editText === 'Edit') {
+                const td = document.querySelector('.td')
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = td.textContent;
+                td.insertBefore(input, td)
+            }
+
+        })
+
+
     });
-    deleteStudent(studentId)
 }
 //Delet student function
 async function deleteStudent(studentId) {
