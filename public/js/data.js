@@ -62,22 +62,20 @@ function mode(array) {
 
 
 //GRAPH
-function graphChart(values, meanValue, modeValue) {
+function graphChart(values) {
 
-    var medianValue = median(values);
-    var meanValue = mean(values);
-    var modeValue = mode(values)
+    var summaryLabels = ['Mean', 'Median'];
     var summaryStats = {
-        mean: meanValue,
-        mode: modeValue,
-        median: medianValue
+        mean: mean(values),
+        mode: mode(values),
+        median: median(values)
     }
 
     var summaryCTX = document.getElementById('summaryChart').getContext('2d');
     var statisticsChart = new Chart(summaryCTX, {
         type: 'bar',
         data: {
-            labels: ['Mean', 'Median'],
+            labels: summaryLabels,
             datasets: [{
                 borderWidth: 1,
                 label: 'Statistics',
